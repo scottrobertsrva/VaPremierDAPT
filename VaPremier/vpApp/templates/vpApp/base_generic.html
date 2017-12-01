@@ -1,0 +1,81 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<meta charset="utf-8">
+    <head>
+        <title class="logo">VaPremier</title>
+        <script src="{% static 'vpApp/popper.js' %}"></script>
+
+        <link rel="stylesheet" type="text/css" href="{% static 'vpApp/style.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'vpApp/jquery-ui.min.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'vpApp/bootstrap.min.css' %}" />
+        <script src="{% static 'vpApp/jquery-1.10.2.min.js' %}"></script>
+        <script src="{% static 'vpApp/d3.v3.min.js' %}"></script>
+        
+        <!--<script src="https://d3js.org/topojson.v2.min.js"></script>-->
+        <script src="https://d3js.org/topojson.v1.min.js"></script>
+        <script src="{% static 'vpApp/jquery-ui.js' %}"></script>
+        <script src="{% static 'vpApp/bootstrap.js' %}"></script>
+        <script src="{% static 'vpApp/d3slider.js' %}"></script>
+        <script src="{% static 'vpApp/moment.js' %}"></script>
+        <script src="{% static 'vpApp/siteScript.js' %}"></script>
+        <script src="{% static 'vpApp/vaCountiesJson.js' %}"></script>
+    </head>
+    <body>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">VaPremier</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="#"> <span class="sr-only">(current)</span></a>
+                <a id="lnkBusOver" class="nav-item nav-link" href="#"></a>
+                <a id="lnkRoi" class="nav-item nav-link" href="#"></a>
+                <a id="lnkFluSeason" class="nav-item nav-link" href="#">Flu Season</a>
+                {% if user.is_authenticated %}
+                    <a id="lnkLog" class="nav-item nav-link fltRight" href="/accounts/logout">logout</a>
+                {% else %}
+                    <a id="lnkLog" class="nav-item nav-link fltRight" href="/accounts/login">login</a>
+                {% endif %}
+              </div>
+            </div>
+          </nav>
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+                {% block content %}
+                {% endblock %}
+                </div>
+            </div>
+            <div class="fluSeasonTool" id="slider3"></div>
+            <div id="mapContainer">
+                <div class="fluSeasonTool" id="map"></div>
+            </div>
+            <div class="fluSeasonTool" id="sidePanel" style="display:none;">
+                <p>Date:&nbsp;<span id="dateDiv"></span></p>
+                <p class="label">Fips Codes Reporting Expenses:&nbsp;<span id="countyCount"></span></p>
+                <!--<p class="label">% Fips Codes Reporting Expenses:&nbsp;<span id="countyPercent"></span></p>-->
+                <p class="label">Total Weekly Expenses:&nbsp;<span id="weeklyExpenses"></span></p>
+                <p class="label">Avg. Expenses Per County:&nbsp;<span id="expPerCounty"></span></p>
+                <div class="bottomLinks"><img id="lnkTable" src="{%static 'vpApp/images/inspect.png' %}"></div>
+
+            </div>
+            <div id="bar"></div>
+        </div>
+        <div id="dialogTable" class="dialog" style="display:none;">
+            <div id="inspect">
+                <table id = "inspectTable" class="table-striped table-hover myTable">
+                    <thead>
+                    <tr><th>Week</th><th>Fips Reporting</th><th>Total Exp</th><th>Exp/Fips</th></tr>
+                    </thead>
+                    <tbody id="inspectTbody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
+
+
+
