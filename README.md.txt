@@ -4,7 +4,7 @@ DAPT 2019 - VaPremier Project
 Notes:
 
 Flu Season Exp Visualization tool is hosted on AWS
-http://http://54.152.92.119
+http://54.152.92.119
 
 contact robertssd@vcu.edu for login info
 
